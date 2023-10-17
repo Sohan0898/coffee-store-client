@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const Cards = ({coffee}) => {
+const Cards = ({coffee , coffees , setCoffees}) => {
 
      const {
         _id,
         name,
         chef,
-        supplier,
+      
         taste,
-        category,
-        details,
+        
+        
         photo,
       } = coffee;
 
@@ -38,6 +38,9 @@ const Cards = ({coffee}) => {
                   'Your Coffee has been deleted.',
                 'success'
                 )
+                const remaining=(coffees.filter(cof => cof._id!== _id));
+                setCoffees(remaining);
+
               }
               
             })
@@ -61,7 +64,7 @@ const Cards = ({coffee}) => {
           <div>
             <div className="btn-group  gap-5 btn-group-vertical">
               <button className="btn btn-warning">View</button>
-              <Link to={'/updateCoffee'}><button className="btn btn-">Update</button></Link>
+              <Link to={`/updateCoffee/${_id}`}><button className="btn btn-">Update</button></Link>
               <button onClick={()=> handleDelete(_id)}  className="btn btn-error">X</button>
             </div>
           </div>
